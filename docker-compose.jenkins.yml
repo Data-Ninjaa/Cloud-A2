@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  webapp-ci:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cloud-a2-app:${BUILD_NUMBER:-latest}
+    container_name: cloud-a2-webapp-ci
+    ports:
+      - "8095:80"
+    volumes:
+      - ./src:/app/src
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
